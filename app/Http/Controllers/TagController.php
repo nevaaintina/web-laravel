@@ -13,7 +13,7 @@ class TagController extends Controller
     public function index()
     {
       $data_tag = Tag::all();
-$jumlah_data = $data_tag->count("id_tag");
+$jumlah_data = $data_tag->count();
 return view('tag.tampil', ['TagBuku' => $data_tag,
 'JumlahTagBuku'=>$jumlah_data]);
     }
@@ -23,7 +23,7 @@ return view('tag.tampil', ['TagBuku' => $data_tag,
      */
     public function create()
     {
-        return view('tag.tambah');
+        return view('tag.create');
     }
 
     /**
@@ -31,9 +31,9 @@ return view('tag.tampil', ['TagBuku' => $data_tag,
      */
     public function store(Request $request)
     {
-        $tag = new Tag;
-$tag->tag = $request->tag;
-$tag->save();
+      Tag::create(
+['tag' => $request->tag]
+);
 return redirect('/tag');
     }
 
@@ -58,7 +58,10 @@ return redirect('/tag');
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data_tag = Tag::find($id);
+$data_tag->tag = $request->tag;
+$data_tag->save();
+return redirect('/tag');
     }
 
     /**
@@ -66,6 +69,8 @@ return redirect('/tag');
      */
     public function destroy(string $id)
     {
-        //
+       $data_tag = Tag::find($id);
+$data_tag->delete();
+return redirect('/tag');
     }
 }

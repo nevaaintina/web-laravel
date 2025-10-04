@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KategoriBuku;
 use Illuminate\Http\Request;
 
 class KategoriBukuController extends Controller
@@ -11,7 +12,12 @@ class KategoriBukuController extends Controller
      */
     public function index()
     {
-        return view('kategori-buku.kategori-buku'); 
+      $data_kategori_buku = KategoriBuku::all()
+->sortBy('kategori_buku');
+$jumlah_data = $data_kategori_buku->count();
+return view('tag.tampil',
+['KategoriBuku' => $data_kategori_buku,
+'JumlahKategoriBuku'=>$jumlah_data ]);
     }
 
     /**
@@ -27,8 +33,8 @@ class KategoriBukuController extends Controller
      */
     public function store(Request $request)
     {
-        $kategori_buku = $request->kategori_buku;
-        return $kategori_buku;
+        $kategori = KategoriBuku::create($request->all());
+return redirect('/kategori-buku');
     }
 
     /**
@@ -44,7 +50,9 @@ class KategoriBukuController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data_kategori_buku = KategoriBuku::find($id);
+return view('kategori-buku.edit', ['KategoriBuku' =>
+$data_kategori_buku]);
     }
 
     /**
@@ -52,7 +60,11 @@ class KategoriBukuController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+    
+KategoriBuku::where('id_kategori_buku',$id)->update([
+'kategori_buku' => $request->kategori_buku]);
+return redirect('/kategori-buku');
+
     }
 
     /**
@@ -60,6 +72,8 @@ class KategoriBukuController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+         $kategori = KategoriBuku::find($id);
+    $kategori->delete();
+    return redirect('/kategori-buku');
     }
 }

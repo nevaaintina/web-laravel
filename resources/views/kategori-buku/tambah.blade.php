@@ -9,7 +9,7 @@ Kategori Buku
 @endsection
 
 @section('main')
-<form action ="{{ url('kategori-buku.data') }}" method="POST">
+<form action ="{{ url('kategori-buku') }}" method="POST">
 @csrf
 <label>Nama Kategori Buku</label>
 <input type="text" name="kategori_buku"><br>
