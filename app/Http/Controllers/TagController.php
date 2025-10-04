@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Tag;
+
 use Illuminate\Http\Request;
+use App\Models\Tag;
 
 class TagController extends Controller
 {
@@ -11,8 +12,10 @@ class TagController extends Controller
      */
     public function index()
     {
-        $data_tag = Tag::all();
-        return view('tag.tampil', ['TagBuku' => $data_tag]);
+      $data_tag = Tag::all();
+$jumlah_data = $data_tag->count("id_tag");
+return view('tag.tampil', ['TagBuku' => $data_tag,
+'JumlahTagBuku'=>$jumlah_data]);
     }
 
     /**
@@ -20,7 +23,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('tag.tambah');
     }
 
     /**
@@ -28,7 +31,10 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tag = new Tag;
+$tag->tag = $request->tag;
+$tag->save();
+return redirect('/tag');
     }
 
     /**

@@ -20,3 +20,5 @@ Route::get('/penerbit.{id}.edit',[PenerbitController::class,'edit']);
 Route::put('/penerbit.{id}',[PenerbitController::class,'update']);
 Route::delete('/penerbit.{id}',[PenerbitController::class,'destroy']);
 Route::get('/tag', [TagController::class,'index']);
+Route::get('/tag/create', [TagController::class,'create']);
+Route::post('/tag', [TagController::class,'store']);
