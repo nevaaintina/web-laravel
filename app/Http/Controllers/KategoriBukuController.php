@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KategoriBuku;
 use Illuminate\Http\Request;
+use App\Models\KategoriBuku;
 
 class KategoriBukuController extends Controller
 {
@@ -12,12 +12,12 @@ class KategoriBukuController extends Controller
      */
     public function index()
     {
-      $data_kategori_buku = KategoriBuku::all()
-->sortBy('kategori_buku');
-$jumlah_data = $data_kategori_buku->count();
-return view('tag.tampil',
-['KategoriBuku' => $data_kategori_buku,
-'JumlahKategoriBuku'=>$jumlah_data ]);
+        $data_kategori_buku = KategoriBuku::all()
+        ->sortBy('kategori_buku');
+        $jumlah_data = $data_kategori_buku->count();
+        return view('kategori-buku.tampil',
+        ['KategoriBuku' => $data_kategori_buku,
+        'JumlahKategoriBuku'=>$jumlah_data ]);
     }
 
     /**
@@ -34,7 +34,7 @@ return view('tag.tampil',
     public function store(Request $request)
     {
         $kategori = KategoriBuku::create($request->all());
-return redirect('/kategori-buku');
+        return redirect('/kategori-buku');
     }
 
     /**
@@ -51,8 +51,8 @@ return redirect('/kategori-buku');
     public function edit(string $id)
     {
         $data_kategori_buku = KategoriBuku::find($id);
-return view('kategori-buku.edit', ['KategoriBuku' =>
-$data_kategori_buku]);
+        return view('kategori-buku.edit', ['KategoriBuku' =>
+        $data_kategori_buku]);
     }
 
     /**
@@ -60,11 +60,9 @@ $data_kategori_buku]);
      */
     public function update(Request $request, string $id)
     {
-    
-KategoriBuku::where('id_kategori_buku',$id)->update([
-'kategori_buku' => $request->kategori_buku]);
-return redirect('/kategori-buku');
-
+        KategoriBuku::where('id_kategori_buku',$id)->update([
+        'kategori_buku' => $request->kategori_buku]);
+        return redirect('/kategori-buku');
     }
 
     /**
@@ -72,8 +70,8 @@ return redirect('/kategori-buku');
      */
     public function destroy(string $id)
     {
-         $kategori = KategoriBuku::find($id);
-    $kategori->delete();
-    return redirect('/kategori-buku');
+        $data_kategori_buku = KategoriBuku::find($id);
+        $data_kategori_buku->delete();
+        return redirect('/kategori-buku');
     }
 }

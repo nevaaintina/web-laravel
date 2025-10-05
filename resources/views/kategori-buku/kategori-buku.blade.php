@@ -10,5 +10,5 @@ Kategori Buku
 
 @section('main')
 Ini Halaman Kategori Buku
-<a href="{{url('/kategori-buku.tambah')}}">Tambah Kategori Buku</a>
+<a href="{{ url('/kategori-buku.tambah') }}">Tambah Kategori Buku</a>
 @endsection
